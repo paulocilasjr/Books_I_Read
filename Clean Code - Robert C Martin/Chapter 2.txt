@@ -1,0 +1,104 @@
+Chapter 2 - Meaningful Names
+
+<<Use intentio-revealing names>>
+Exemple:
+public List<Cell> getFlaggedCells() {
+    List<Cell> flaggedCells = new ArrayList<Cell>();
+    for (Cell cell : gameBoard)
+        if (cell.isFlagged())
+            flaggedCells.add(cell);
+    return flaggedCells;
+}
+
+<<Avoid Disinformation>>
+*We should avoid words entrenched meanings vary from our intended meaning. 
+Exemple:
+Do not refer to a grouping of acconts as an accountList unless it's actually a List.
+
+<<Make Meaningful distinctins>>
+Exemple:
+public static void copyChars (char a1[], char a2[]) {
+    for (int i = 0. i < ai.length; i++) {
+        a2[i] = a1 [i];
+    }
+}
+The function reads much better when source and destination are used for the arguments names (a1, a2)
+
+<<Use Pronounceable names>>
+Example:
+private Date genymdhms; 
+TO
+private Date generationTimestamp;
+
+<<Use Searchable names>>
+The length of a name should correspond to the size of its scope.
+give it a search-friendly name.
+Example:
+const int WORK_DAYS_PER_WEEK = 5;
+
+<<Member Prefixes>>
+You also don't need to prefix member variables with 'm_' anymore.
+Example:
+public ckass Part {
+    private String m_dsc; // The textual description
+    void setName(String name) {
+        m_dsc = name;
+    }
+}
+TO
+public class Part {
+    String description;
+    void setDescription(String description){
+        this.description = description;
+    }
+}
+
+<<Interfaces and Implementations>>
+The preceding 'I', so common in today's legacy wads, is a distraction at best
+and too much information at worst. 
+So if I must encode either the interface or the implementation, I choose the 
+implementation. Calling it ShapeFactoryImp, or even the hideous CShapeFactory, 
+is preferable to encoding the interface.
+
+<<Avoid Mental Mapping>>
+One difference between a smart programmer and a professional programmer is that
+the professional understands that clarity is king. Professionals use their
+powers for good and write code that others can understand.
+
+<<Class Names>>
+Classes and Objects should have noun or noun phrase names. Should not be a verb.
+Example:
+Customer, Wikipage, Account, and AddressParser. 
+
+<<Method Names>>
+Methods should have verb or verb phrase names like postPayment, deletePage, or save.
+Accessors, mutators, and predicates should be named for their value and prefixed
+with get, set, and is. 
+
+When constructors are overloaded, use static factory methods with names that describe
+the arguments. 
+Example:
+Complex fulcrumPoint = new Complex(23.0);
+TO
+Complex fulcrumPoint = Complex.FromReaNumber(23.0);
+
+<<Dont'be Cute>>
+Say wwhat you  mean. Mean what you Say!
+
+<<Pick one word per Concept>>
+It's confusing to have fetch, retrieve, and get as equivalent methods of different classes.
+
+<<Don't pun>>
+Avoid using the same word for two purposes.
+
+<<Use Solution Domain Names>>
+Use computer Science terms, algorithm names, pattern names, math terms, and so forth. 
+
+<<Add Meaningful Context>>
+There are a few names which are meaningful in and of themselves-most are not. You need
+to place names in context for your reader by enclosing them in well-named classes, functions,
+or namespaces. When all else fails, then prefixing the name may be necessary as a last resort.
+
+<<Don't add gratuitous context>>
+Shorter names are generally better than longer ones, so long as they are clear. Add no more
+context to a name than is necessary.
