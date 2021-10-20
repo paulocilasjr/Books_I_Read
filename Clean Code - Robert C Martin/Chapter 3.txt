@@ -1,0 +1,169 @@
+//FUNCTIONS//
+
+<<Small>>
+Rule 1: Functions should be Small
+Rule 2: Smaller than rule 1.
+Example:
+public static String renderPageWithSetupsAndTeardowns(
+    PageData pageData, boolean isSuite){
+    if (isTestPage(pageData))
+        includeSetupAndTeardownPages(pageData, isSuite);
+    return pageData.getHtml ();
+}
+
+<<Blocks and Identing>>
+blocks within if statements, else statements, while statements, and so on should be one line long.
+Probably that line should be a funtion call.
+
+<<Do one Thing>>
+Functions should do one thing. They should do it well. They should do it only.
+Use brief TO paragraph. If a function does only steps that are one level below the stated name of 
+the function, then the function is doing one thing.
+
+<<One level of Abstraction per Function>>
+Statements within our functions are all at the same level of abstraction.
+Mixing levels of abstractions within a function is always confusing.
+
+<<Reading Code from top to Bottom: the Stepdown Rule>>
+Descending one level of abstraction at a time.
+A set of TO paragraph, each of which is describing the current level of abstraction and referecing
+subsequent TO paragraph at the next level down.
+
+<<Switch Statements>>
+Unfortunately we can't always avoid switch statements, but we can make sure that each switch statement is buried
+in a low-level class and is never repeated. We do this, of course, with polymorphism.
+General rule: they appear only once, are used to create polymorphic objects, and are hidden behind an inheritance
+relationship so that the rest of the system can't see them.
+Example:
+public abstract class Employee {
+    public abstract boolean isPayDay();
+    public abstract Money calculatePay();
+    public abstract void deliverPay (Money pay);
+}
+------------------------
+public interface EmployeFactory {
+    public Employee makeEmployee(EmployeeRecord r) throws InvalidEmployeeType;
+}
+------------------------
+public class EmployeeFactoryEmp1 implements EmployeeFactory {
+    public Employee makeEmployee(EmployeeRecord r) throws InvalideEmployeeType {
+        swithc (r.type) {
+            case COMISSIONED:
+                return new ComissionedEmployee(r);
+            case HOURLY:
+                return new HourlyEmployee(r);
+            case SALARIED:
+                return new SalarieEmployee(r);
+            default:
+                throw new InvalidEmployeeType(r.type);
+        }
+    }
+}
+
+<<Use descriptive Names>>
+Don't be afraid to make a name long. A long descriptive name is better than a short enigmatic name.
+A long descriptive name is better than a long descriptive comment.
+"You know you are working on clean code when each routine turns out to be pretty much what you expected".
+Be consistent in your names.
+Example1:
+testableHtml 
+TO
+SetupTeardownIncluder.render.
+
+<<Functions arguments>>
+The ideal number of arguments for a function is zero (niladic). Next comes one (monadic), followed closely by two (dyadic).
+Three arguments (triadic) should be avoided where possible.
+More than three (polyadic) requires very special justification--and then shouldn't be used anyway.
+Arguments are hard. They take a lot of conceptual power.
+Arguments are even harder from a testing point of view.
+Passing a boolean into a function is a truly terrible practice.
+
+<<Verbs and Keywords>>
+In monad function, function name and its argument should form a very nice verb/noun pair.
+Example:
+writeField(name)
+
+<<Have no side effects>>
+Side efects are lies. Your function promises to do one thing, but it also does other hidden things
+
+<<Output Arguments>>
+Arguments are most naturally interpreted as inputs to a function. I'm sure you've done a double-take
+on an argument that was actually an output than an input. 
+For Example:
+appendFooter(s);
+
+Does this function append s as the footer to something? Or does it append some footer to s? Is s an input
+or an output? It doesnt take long to look at the function signature and see:
+public void appendFooter(StringBuffer report)
+Anything that forces you to check the function signature is equivalent to a double-take. 
+It's a cognitive break and should be avoided.
+
+Fixing previous example: It should be
+report.appendFooter();
+In general output arguments should be avoided. If your function must change the state of something, 
+have it change the state of its owning object.
+
+<<Command Query Separation>>
+Functions should either do something or answer something, but not both.
+Function should change the state of an object, or it should return some information about the object.
+
+Example:
+if(set("username", "unclebob"))...
+change it to:
+if(attributeExists("username")){
+    setAttribute("username", "unclebob");
+}
+
+<<Prefer Exceptions to returning Error code>>
+Using exceptions instead of returned error codes, then the error processing code can be separated from
+the happy path code and can be simplified:
+Example:
+try {
+    deletePage(page);
+    registry.deleteReference(page.name);
+    configKeys.deleteKey(page.name..makeKey());
+}
+catch (Excpetion e) {
+    looger.log(e.getMessage());
+}
+
+Try/catch blocks are ugly in ther own right. They confuse the structure of the code and mix error 
+processing with normal processing. So it is better to extract the bodies of the try and catch Blocks
+out into functions of their own.
+
+public void delete(Page page){
+    try {
+        deletePageAndAllReferences(page);
+    }
+    catch (Exception e) {
+        logError(e);
+    }
+}
+private void deletePageAndAllReferences (Page page) throws Exception {
+    deletePage(page);
+    registry.deleteReference(page.name);
+    configKeys.deleteKey(page.name,makeKey());
+}
+private void logError(Exception e) {
+    logger.log(e.getMessagee());
+}
+
+When you use exceptions rather than error codes, then new excepetions are derivatives of the exception
+class.
+
+<<Don't Repeat Yourself>>
+Duplication may be the root of all evil in software.
+
+<<Structured programming>>
+Edsger Dijkstra'rule: "Every function, and every block whithin a function, should have one entry and
+one exit. > It is only in larger functions that shuch rules provide significant benefit. 
+
+So if you keep your function small, then the occasional multiple return, break, or continue statement
+does no harm and can sometimes even be more expressive than the single-entry, single-exit rule.
+
+<<How do you write functions like this?>>
+Writing software is like any other kind of writing. When you write a paper or an article, you get
+your thoughts down first, then you massage it until it reads well. The first draft might be clumsy
+and disorganized, so you wordsmith it and restructure it and refine it until it reads the way you want it to read.
+I don't write them following the rules to start. I don't think anyone could. 
+
