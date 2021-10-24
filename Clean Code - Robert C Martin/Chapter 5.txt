@@ -1,0 +1,24 @@
+//Formatting
+
+Code formatting is important. It is too impoprtant to ignore and
+it is too important to treat religiously.
+Code formatting is about communication, and communication is the 
+professional developer's first order of business.
+
+The coding style and readability set precedents that contune to 
+affect maintainability and extensibility long after the original Code
+has been changed beyond recognition. 
+
+<<Vertical Formatting>>
+Small files are usually easier to understand than large files are
+
+<<Vertical Openness between concepts>>
+Each line represents an expression or a clause, and each group of lines
+represents a complete thought.
+Those thoughts should be separated from each other with blank lines.
+
+<<vertical density>>
+Lines of code that are tightly related should apper vertically dense.
+
+<<Variable declarations>>
+Variables should be declared as close to ther usage as possible.

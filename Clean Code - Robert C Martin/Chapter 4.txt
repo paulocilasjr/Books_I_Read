@@ -1,0 +1,9 @@
+// Comments 
+
+Comments are not "pure good". Indeed, comments are, at best, a necessary evil.
+If your our programming languages were expressive enough, or if we had the talent
+to subtly wield those languages to express our intent, we should not need comments 
+very much--perhaps not at all. 
+
+The proper use of comments is to compensate for our failure to express ourself in code.
+Inaccurate comments are far worse than no comments at all.
