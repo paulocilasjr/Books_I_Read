@@ -25,3 +25,14 @@ The complement is also true:
 Procedural code makes it hard to add new data structures because all the functions must change.
 OO code makes it hard to add new functions because all the classes must change.
 
+<<Data Transfer Objects>>
+A data structure where a class with public variables and no functions is sometimes called a
+data transfer object, or DTO.
+DTO are very useful structures, especially when communicating with databases or parsing messages
+from socktes, and so on. 
+
+<<Active Record>>
+Special forms of DTO. They are data structures with public (or bean-accessed) variables; but they tipically
+have navigation methods like save and find. 
+Sometimes data structures are treate as objects by putting business rule methods in them (creating a hybrid
+between a data structure and an object)
