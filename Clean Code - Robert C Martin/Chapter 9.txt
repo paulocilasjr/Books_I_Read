@@ -21,3 +21,20 @@ What makes a clean test? three things: Readability, Readability, and Readability
 
 There are things that you might never do in a production environment that are
 perfectly fine in a test environment. 
+
+<<Single assert per test rule>>
+
+<<Single concept per test>>
+Better rule is that we want to test a single concept in each test function.
+Merging multople tests into sema function forces the reader to figure out 
+why each section is there and what is being tested by that section.
+Minimize the number of asserts per concept and test just one concept per
+test function
+
+F.I.R.S.T : clean tests follow five rules
+Fast
+Independent 
+Repeatable
+Self-validating
+Timely
+
